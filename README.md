@@ -25,6 +25,11 @@ REQUEST BODY
 }
 ```
 
+For example with the above values and URL, the s3-image will look like below
+
+![img](https://user-images.githubusercontent.com/5524260/28939227-749ac728-7845-11e7-9988-aa38de521cd0.png)
+
+
 
 How is packaging done ?
 =======================

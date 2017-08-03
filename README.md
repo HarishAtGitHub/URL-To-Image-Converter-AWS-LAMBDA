@@ -8,9 +8,10 @@ This is an AWS Lambda deployment package.
 
 PREREQ:
 ======
+
 S3- BUCKET NAME: alexa-image-store
 
-BUCKET-SUBFOLDER-NAME: alexa-location-annotator
+Access to read the object from s3 : public-read permission so that image url can be made public
 
 API-DOCS:
 ========

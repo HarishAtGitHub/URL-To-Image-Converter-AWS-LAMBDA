@@ -1,21 +1,30 @@
 def lambda_handler(event, context):
     from selenium import webdriver
     from selenium.common.exceptions import TimeoutException
+    import os
 
     # input
-    url = event['url']
+    url = str(event['url'])
 
-    # constants 
+    # FIXME
     try:
-        IMAGE_NAME = event['image_name']
+        IMAGE_NAME = str(event['image_name'])
     except KeyError as ke:
         IMAGE_NAME = 'img.png'
-    MAX_PAGE_LOAD_TIME = 4
-    WINDOW_SIZE_WIDTH = 1024
-    WINDOW_SIZE_HEIGHT = 768
+    try:
+        MAX_PAGE_LOAD_TIME = int(event['max_page_load_time'])
+    except KeyError as ke:
+        MAX_PAGE_LOAD_TIME = 4
+    try:
+        WINDOW_SIZE_WIDTH = int(event['window_size_width'])
+    except KeyError as ke:
+        WINDOW_SIZE_WIDTH = 1024
+    try:
+        WINDOW_SIZE_HEIGHT = int(event['window_size_height'])
+    except KeyError as ke:
+        WINDOW_SIZE_HEIGHT = 768
 
     # function
-    import os
     driver = webdriver.PhantomJS(service_log_path=os.path.devnull, executable_path="./phantomjs/bin/phantomjs")
     driver.set_window_size(WINDOW_SIZE_WIDTH, WINDOW_SIZE_HEIGHT) # set the window size that you need 
     driver.get(url)
@@ -49,4 +58,3 @@ def load_image_to_s3(image, name):
 #S lambda_handler(event, "context")
 #event = { "url" : 'https://myatlascms.maps.asu.edu/map/?id=120&s=p&reference=MU#!sbc/' }
 #lambda_handler(event, "context")
-
